@@ -20,10 +20,10 @@ const loadNews = () => {
 
 const displayNewsCategory = (categoryes) => {
     const categoryList =  document.getElementById("category-list");
-    categoryList.classList.add("d-flex")
+    categoryList.classList.add("d-flex", "row")
     categoryes.forEach(category => {
         const ul = document.createElement("ul");
-        ul.classList.add("list-item", "list-Color")
+        ul.classList.add("list-item", "list-Color","col-lg", "col-sm-6")
         ul.innerHTML = `
              <li onclick="categoryId('${category.category_id}')" class="me-3">${category.category_name}</li>
         `
@@ -48,7 +48,7 @@ const categoryId = (id) => {
 const displayNewsList = (allNews) => {
 
     const inputField = document.getElementById("input-field");
-    inputField.value = `${allNews.length} items found for this category`
+    inputField.value = `${allNews.length} items found`
 
     const showNews = document.getElementById("show-news")
     if(allNews.length === 0){
@@ -63,7 +63,7 @@ const displayNewsList = (allNews) => {
     
     allNews.sort((a,b) => b.total_view - a.total_view)
     console.log(allNews)
-    
+
     allNews.forEach(news => {
         
         const div = document.createElement("div");
@@ -78,8 +78,8 @@ const displayNewsList = (allNews) => {
                             <h5 class="card-title">${news.title}</h5>
                             <p class="card-text">${news.details.length > 100 ? news.details.slice(0, 150) + "...." : news.details}</p>
                         </div>
-                        <div class="d-flex ms-3 mt-4 align-items-center justify-content-between">
-                            <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center justify-content-between row ms-1">
+                            <div class="d-flex align-items-center col-lg-4 col-sm-12">
                               <div>
                                 <img style="width:100%; height: 70px;" class="rounded-circle img-fluid" src="${news.author.img}"></div>
                                 <div class="mt-3 ms-2">
@@ -87,10 +87,10 @@ const displayNewsList = (allNews) => {
                                     <p>${news.author.published_date ? news.author.published_date : "No Published"}</p>
                                 </div>
                             </div>
-                            <div class="ms-5 me-5">
+                            <div class="col-lg-4 col-sm-12">
                                 <p>Views: ${news.total_view ? news.total_view : "No Views"}</p>
                             </div>
-                            <div class="text-end">
+                            <div class="col-lg-4 col-sm-12">
                                 <button onclick="seeMoreBtn('${news._id}')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">See More</button>
                             </div>
                         </div>
