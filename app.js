@@ -19,6 +19,7 @@ const loadNews = () => {
 
 
 const displayNewsCategory = (categoryes) => {
+    console.log(categoryes)
     const categoryList =  document.getElementById("category-list");
     categoryList.classList.add("d-flex")
     categoryes.forEach(category => {
@@ -39,13 +40,16 @@ const categoryId = (id) => {
     try{
         fetch(url)
         .then(res => res.json())
-            .then(data => displayNewsList(data.data))
+        .then(data => displayNewsList(data.data))
     }catch(err){
         console.log(err)
     }
 }
 
 const displayNewsList = (allNews) => {
+    const inputField = document.getElementById("input-field");
+    inputField.value = `${allNews.length} items found for this category`
+
     const showNews = document.getElementById("show-news")
     if(allNews.length === 0){
         showNews.classList.remove("d-none")
@@ -124,7 +128,11 @@ const displayModal = (newsId) => {
     console.log(newsId)
     modal.innerHTML = `
         <h2>${newsId.author.name}</h2>
-        <img class="w-50 h-50" src="${newsId.author.img}"/>
+        <img class="w-100 h-25" src="${newsId.thumbnail_url}"/>
+        <h5>Author: ${newsId.author.name ? newsId.author.name : "NO AUTHOR"}</h5>
+        <p>Published Date: ${newsId.author.published_date ? newsId.author.published_date : "NO Published"}</p>
+        <p>Author: ${newsId.author.name ? newsId.author.name : "NO AUTHOR"}</p>
+        <p>Author: ${newsId.author.name ? newsId.author.name : "NO AUTHOR"}</p>
 
     `
 }
