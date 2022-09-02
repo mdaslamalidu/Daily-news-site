@@ -19,7 +19,6 @@ const loadNews = () => {
 
 
 const displayNewsCategory = (categoryes) => {
-    console.log(categoryes)
     const categoryList =  document.getElementById("category-list");
     categoryList.classList.add("d-flex")
     categoryes.forEach(category => {
@@ -47,6 +46,7 @@ const categoryId = (id) => {
 }
 
 const displayNewsList = (allNews) => {
+
     const inputField = document.getElementById("input-field");
     inputField.value = `${allNews.length} items found for this category`
 
@@ -59,7 +59,13 @@ const displayNewsList = (allNews) => {
     }
     const newsList = document.getElementById("news-list")
     newsList.innerText = "";
+    console.log(allNews)
+    
+    allNews.sort((a,b) => b.total_view - a.total_view)
+    console.log(allNews)
+    
     allNews.forEach(news => {
+        
         const div = document.createElement("div");
         div.innerHTML = `
             <div class="card mb-3 p-4" style="max-width: 100%;">
