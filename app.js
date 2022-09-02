@@ -56,7 +56,6 @@ const displayNewsList = (allNews) => {
     const newsList = document.getElementById("news-list")
     newsList.innerText = "";
     allNews.forEach(news => {
-        console.log(news)
         const div = document.createElement("div");
         div.innerHTML = `
             <div class="card mb-3 p-4" style="max-width: 100%;">
@@ -108,16 +107,24 @@ const showSpinner = (spinner) => {
 
 
 const seeMoreBtn = (id) => {
+    const url = `https://openapi.programming-hero.com/api/news/${id}`
+
+    try{
+        fetch(url)
+        .then(res => res.json())
+        .then(data => displayModal(data.data[0]))
+    }catch(err){
+        console.log(err)
+    }
+}
+
+
+const displayModal = (newsId) => {
     const modal = document.getElementById("phone-details");
+    console.log(newsId)
     modal.innerHTML = `
-        <h2>${id.name}</h2>
-        <img class="w-50 h-50" src="${data.image}"/>
-        <p>${data.releaseDate ? data.releaseDate : "No Found"}</p>
-        <strong>${data.mainFeatures.sensors[0]}</strong>
-        <strong>${data.mainFeatures.sensors[1]}</strong>
-        <strong>${data.mainFeatures.sensors[2]}</strong>
-        <strong>${data.mainFeatures.sensors[3]}</strong>
-        <strong>${data.mainFeatures.sensors[4]}</strong>
+        <h2>${newsId.author.name}</h2>
+        <img class="w-50 h-50" src="${newsId.author.img}"/>
 
     `
 }
