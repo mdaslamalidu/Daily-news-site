@@ -1,11 +1,3 @@
-document.getElementById("blog-item").addEventListener("click", function(){
-    const blog = document.getElementById("blog-item");
-    const news = document.getElementById("news-item");
-    blog.classList.add("active");
-    news.classList.add("news");
-})
-
-
 const loadNews = () => {
         fetch("https://openapi.programming-hero.com/api/news/categories")
         .then(res => res.json())
@@ -132,6 +124,8 @@ const displayModal = (newsId) => {
         <img class="w-100 h-25" src="${newsId.author.img}"/>
         <h5>Author: ${newsId.author.name ? newsId.author.name : "NO AUTHOR"}</h5>
         <p>Published Date: ${newsId.author.published_date ? newsId.author.published_date : "NO Published"}</p>
+        <p>Views: ${newsId.total_view ? newsId.total_view : "NO Views"}</p>
+
 
     `
 }

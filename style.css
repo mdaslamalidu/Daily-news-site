@@ -19,14 +19,6 @@ body{
     font-weight: bold;
 }
 
-.active{
-    color: blue;
-}
-
-.news{
-    color: gray;
-}
-
 .img-width{
     width: 50px;
 }
