@@ -7,20 +7,20 @@ document.getElementById("blog-item").addEventListener("click", function(){
 
 
 const loadNews = () => {
-    try{
         fetch("https://openapi.programming-hero.com/api/news/categories")
         .then(res => res.json())
-            .then(data => displayNewsCategory(data.data.news_category))
-    }catch(err){
-        console.log(err)
-    }
+        .then(data => displayNewsCategory(data.data.news_category))
+        .catch((err) => {
+            console.log(err)
+        })
+        
 }
 
 
-const displayNewsCategory = (categoryes) => {
+const displayNewsCategory = (categories) => {
     const categoryList =  document.getElementById("category-list");
     categoryList.classList.add("d-flex", "row")
-    categoryes.forEach(category => {
+    categories.forEach(category => {
         const ul = document.createElement("ul");
         ul.classList.add("list-item", "list-Color","col-lg", "col-sm-6")
         ul.innerHTML = `
@@ -35,14 +35,14 @@ const displayNewsCategory = (categoryes) => {
 const categoryId = (id) => {
     showSpinner(true)
     const url = `https://openapi.programming-hero.com/api/news/category/${id}`
-    try{
         fetch(url)
         .then(res => res.json())
         .then(data => displayNewsList(data.data))
-    }catch(err){
-        console.log(err)
-    }
+        .catch((err)=> {
+            console.log(err)
+        })
 }
+
 
 const displayNewsList = (allNews) => {
 
@@ -56,13 +56,13 @@ const displayNewsList = (allNews) => {
     }else{
         showNews.classList.add("d-none")
     }
+
     const newsList = document.getElementById("news-list")
     newsList.innerText = "";
     
     allNews.sort((a,b) => b.total_view - a.total_view)
 
     allNews.forEach(news => {
-        
         const div = document.createElement("div");
         div.innerHTML = `
             <div class="card mb-3 p-4" style="max-width: 100%;">
@@ -95,7 +95,6 @@ const displayNewsList = (allNews) => {
                 </div>
             </div>
         `
-
         newsList.appendChild(div)
         showSpinner(false)
     })
@@ -115,15 +114,14 @@ const showSpinner = (spinner) => {
 
 const seeMoreBtn = (id) => {
     const url = `https://openapi.programming-hero.com/api/news/${id}`
-
-    try{
         fetch(url)
         .then(res => res.json())
         .then(data => displayModal(data.data[0]))
-    }catch(err){
-        console.log(err)
-    }
+        .catch((err) => {
+            console.log(err)
+        })
 }
+
 
 
 const displayModal = (newsId) => {
@@ -131,11 +129,9 @@ const displayModal = (newsId) => {
     console.log(newsId)
     modal.innerHTML = `
         <h2>${newsId.author.name}</h2>
-        <img class="w-100 h-25" src="${newsId.thumbnail_url}"/>
+        <img class="w-100 h-25" src="${newsId.author.img}"/>
         <h5>Author: ${newsId.author.name ? newsId.author.name : "NO AUTHOR"}</h5>
         <p>Published Date: ${newsId.author.published_date ? newsId.author.published_date : "NO Published"}</p>
-        <p>Author: ${newsId.author.name ? newsId.author.name : "NO AUTHOR"}</p>
-        <p>Author: ${newsId.author.name ? newsId.author.name : "NO AUTHOR"}</p>
 
     `
 }
