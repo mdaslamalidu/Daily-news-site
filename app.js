@@ -1,7 +1,6 @@
 document.getElementById("blog-item").addEventListener("click", function(){
     const blog = document.getElementById("blog-item");
     const news = document.getElementById("news-item");
-    console.log(news)
     blog.classList.add("active");
     news.classList.add("news");
 })

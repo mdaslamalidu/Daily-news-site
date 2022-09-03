@@ -3,25 +3,28 @@ body{
     padding: 0;
     background-color: lightgrey;
 }
+
 .news-link{
     text-decoration: none;
-    color: blue;
     font-weight: bold;
+    transition: .1s;
+}
+
+.news-link:hover, .text-mute:hover{
     border-bottom: 3px solid blue;
 }
 
-.text-muted{
+.text-mute{
     text-decoration: none;
     font-weight: bold;
 }
 
 .active{
     color: blue;
-    border-bottom: 3px solid blue;
 }
 
 .news{
-    border-bottom: none;
+    color: gray;
 }
 
 .img-width{
