@@ -120,7 +120,7 @@ const displayModal = (newsId) => {
     const modal = document.getElementById("phone-details");
     console.log(newsId)
     modal.innerHTML = `
-        <h2>${newsId.author.name}</h2>
+        <h2>${newsId.author.name ? newsId.author.name : "No Name"}</h2>
         <img class="w-100 h-25" src="${newsId.author.img}"/>
         <h5>Author: ${newsId.author.name ? newsId.author.name : "NO AUTHOR"}</h5>
         <p>Published Date: ${newsId.author.published_date ? newsId.author.published_date : "NO Published"}</p>
